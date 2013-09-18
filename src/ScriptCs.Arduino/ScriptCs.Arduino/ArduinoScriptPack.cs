@@ -1,17 +1,33 @@
-﻿using ScriptCs.Contracts;
+﻿using System;
+using ScriptCs.Contracts;
 
-namespace ScriptCs.Arduino {
-    public class ArduinoScriptPack : IScriptPack {
-        public void Initialize(IScriptPackSession session) {
+namespace ScriptCs.Arduino
+{
+    public class ArduinoScriptPack : IScriptPack
+    {
+        private Arduino _board = new Arduino();
+
+        public ArduinoScriptPack()
+        {
+            _board.Setup();
+        }
+
+        public void Initialize(IScriptPackSession session)
+        {
             session.ImportNamespace("System.IO.Ports");
             session.ImportNamespace("System.Threading");
+            session.ImportNamespace("ScriptCs.Arduino");
+            session.ImportNamespace("ScriptCs.Arduino.Components");
         }
 
-        IScriptPackContext IScriptPack.GetContext() {
-            return new Arduino();
+        IScriptPackContext IScriptPack.GetContext()
+        {
+            return _board;
         }
 
-        public void Terminate() {
+        public void Terminate()
+        {
+            _board.Dispose();
         }
     }
 }

@@ -49,6 +49,10 @@
   <ItemGroup>
     <Compile Include="Arduino.cs" />
     <Compile Include="ArduinoScriptPack.cs" />
+    <Compile Include="Components\Led.cs" />
+    <Compile Include="DigitalPin.cs" />
+    <Compile Include="PinMode.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
