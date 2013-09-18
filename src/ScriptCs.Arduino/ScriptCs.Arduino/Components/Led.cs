@@ -7,27 +7,37 @@ namespace ScriptCs.Arduino.Components
         private readonly Arduino _board;
         private readonly int _pin;
         private bool _shouldStop;
+        private Timer _timer;
+        private DigitalPin _value;
 
         public Led(Arduino board, int pin)
         {
             _board = board;
             _pin = pin;
+            _value = DigitalPin.Low;
             _board.PinMode(pin, PinMode.Output);
         }
 
         public void Strobe(int milliseconds = 150)
         {
-            while (!_shouldStop)
+            _timer = new Timer(state =>
             {
-                _board.DigitalWrite(_pin, DigitalPin.High);
-                Thread.Sleep(milliseconds);
-                _board.DigitalWrite(_pin, DigitalPin.Low);
-                Thread.Sleep(milliseconds);
-            }
+                if (_value == DigitalPin.Low)
+                {
+                    _value = DigitalPin.High;
+                    _board.DigitalWrite(_pin, DigitalPin.High);
+                }
+                else
+                {
+                    _value = DigitalPin.Low;
+                    _board.DigitalWrite(_pin, DigitalPin.Low);
+                }
+            }, null, 0, milliseconds);
         }
+
         public void Stop()
         {
-            _shouldStop = true;
+            _timer.Dispose();
         }
     }
 }

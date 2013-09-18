@@ -5,7 +5,7 @@ namespace ScriptCs.Arduino
 {
     public class ArduinoScriptPack : IScriptPack
     {
-        private Arduino _board = new Arduino();
+        private readonly Arduino _board = new Arduino();
 
         public ArduinoScriptPack()
         {
