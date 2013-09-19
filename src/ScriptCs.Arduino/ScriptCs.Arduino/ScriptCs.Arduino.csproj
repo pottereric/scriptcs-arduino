@@ -50,6 +50,7 @@
     <Compile Include="ArduinoContext.cs" />
     <Compile Include="ArduinoScriptPack.cs" />
     <Compile Include="Components\Led.cs" />
+    <Compile Include="IntExtensions.cs" />
     <Compile Include="DigitalPin.cs" />
     <Compile Include="Interfaces\IArduino.cs" />
     <Compile Include="Interfaces\IBoard.cs" />
