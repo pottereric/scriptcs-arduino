@@ -1,43 +1,78 @@
-﻿using System.Threading;
+﻿using System;
+using ScriptCs.Arduino.Interfaces;
+using ScriptCs.Arduino.Models;
 
 namespace ScriptCs.Arduino.Components
 {
-    public class Led
+    public class Led : SinglePinComponent
     {
-        private readonly Arduino _board;
-        private readonly int _pin;
-        private bool _shouldStop;
-        private Timer _timer;
         private DigitalPin _value;
+        public Led(IArduino board, int pin) : base(board, pin) { }
+        public LedState State { get; set; }
+        public Action<LedState> OnStateChanged { get; set; }
 
-        public Led(Arduino board, int pin)
+        public void StrobeOn(int milliseconds = 150)
         {
-            _board = board;
-            _pin = pin;
-            _value = DigitalPin.Low;
-            _board.PinMode(pin, PinMode.Output);
-        }
-
-        public void Strobe(int milliseconds = 150)
-        {
-            _timer = new Timer(state =>
+            SetInterval(() =>
             {
                 if (_value == DigitalPin.Low)
                 {
                     _value = DigitalPin.High;
-                    _board.DigitalWrite(_pin, DigitalPin.High);
+                    Board.DigitalWrite(Pin, DigitalPin.High);
                 }
                 else
                 {
                     _value = DigitalPin.Low;
-                    _board.DigitalWrite(_pin, DigitalPin.Low);
+                    Board.DigitalWrite(Pin, DigitalPin.Low);
                 }
-            }, null, 0, milliseconds);
+            }, milliseconds);
         }
 
-        public void Stop()
+        public void StrobeOff()
         {
-            _timer.Dispose();
+            StopTimer();
         }
+
+        public void On()
+        {
+            Board.DigitalWrite(Pin, DigitalPin.High);
+        }
+
+        public void Off()
+        {
+            Board.DigitalWrite(Pin, DigitalPin.Low);
+        }
+
+        public void Toggle()
+        {
+            Board.DigitalWrite(Pin, State == LedState.Off ? DigitalPin.High : DigitalPin.Low);
+        }
+    }
+
+    public class LedPwm : Led
+    {
+        public LedPwm(IArduino board, int pin) : base(board, pin){}
+        public int Intensity { get; set; }
+
+        public void Fade(int finalValue, TimeSpan fromMilliseconds)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fade(int initialValue, int finalValue, int milliseconds)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fade(int initialValue, int finalValue, TimeSpan milliseconds)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public enum LedState
+    {
+        On,
+        Off
     }
 }
