@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E5C70FAA-1351-42DF-AE47-99625E1BF117}</ProjectGuid>
+    <ProjectGuid>{6688664B-48EB-4D56-923E-FDB94E85D511}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScriptCs.Arduino</RootNamespace>
-    <AssemblyName>ScriptCs.Arduino</AssemblyName>
+    <RootNamespace>ScriptCs.Arduino.Tests</RootNamespace>
+    <AssemblyName>ScriptCs.Arduino.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,15 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging">
-      <HintPath>..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.1.1309.1617\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="ScriptCs.Contracts, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ScriptCs.Contracts.0.8.0\lib\net45\ScriptCs.Contracts.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Should.Fluent">
+      <HintPath>..\packages\ShouldFluent.1.1.19\lib\Should.Fluent.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,26 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArduinoContext.cs" />
-    <Compile Include="ArduinoScriptPack.cs" />
-    <Compile Include="Components\Led.cs" />
-    <Compile Include="Components\LedPwm.cs" />
-    <Compile Include="Components\LedState.cs" />
-    <Compile Include="Interfaces\ITimer.cs" />
-    <Compile Include="IntExtensions.cs" />
-    <Compile Include="DigitalPin.cs" />
-    <Compile Include="Interfaces\IArduino.cs" />
-    <Compile Include="Models\Arduino.cs" />
-    <Compile Include="Models\Component.cs" />
-    <Compile Include="Models\SinglePinComponent.cs" />
-    <Compile Include="Models\Timer.cs" />
-    <Compile Include="PinMode.cs" />
-    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Components\LedTests.cs" />
+    <Compile Include="MockedTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScriptCs.Arduino\ScriptCs.Arduino.csproj">
+      <Project>{E5C70FAA-1351-42DF-AE47-99625E1BF117}</Project>
+      <Name>ScriptCs.Arduino</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

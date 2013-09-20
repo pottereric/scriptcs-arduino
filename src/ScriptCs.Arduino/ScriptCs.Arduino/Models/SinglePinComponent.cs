@@ -6,8 +6,8 @@ namespace ScriptCs.Arduino.Models
     {
         protected readonly int Pin;
 
-        public SinglePinComponent(IArduino board, int pin)
-            : base(board)
+        public SinglePinComponent(IArduino board, int pin, ITimer timer = null)
+            : base(board, timer)
         {
             Pin = pin;
         }
