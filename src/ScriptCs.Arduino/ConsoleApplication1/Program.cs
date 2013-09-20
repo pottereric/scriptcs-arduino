@@ -33,11 +33,9 @@ namespace ConsoleApplication1
             {
                 Console.WriteLine(state);
             };
-            ledPwm.Intensity = 0;
-            ledPwm.Fade(255, TimeSpan.FromMilliseconds(300));
-            ledPwm.Fade(0, 255, 300);
+            ledPwm.Intensity = 50;
+            ledPwm.Fade(255, 1.Second());
             ledPwm.Fade(0, 255, 300.Milliseconds());
-            ledPwm.Fade(0, 255, 300);
             
         }
     }

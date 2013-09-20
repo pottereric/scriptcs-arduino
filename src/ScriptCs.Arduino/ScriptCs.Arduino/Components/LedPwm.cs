@@ -5,22 +5,59 @@ namespace ScriptCs.Arduino.Components
 {
     public class LedPwm : Led
     {
-        public LedPwm(IArduino board, int pin) : base(board, pin){}
-        public int Intensity { get; set; }
+        private const int MinRange = 0;
+        private const int MaxRange = 255;
 
-        public void Fade(int finalValue, TimeSpan fromMilliseconds)
+        private int _intensity;
+
+        public int Intensity
         {
-            throw new NotImplementedException();
+            get { return _intensity; }
+            set
+            {
+                if (_intensity == value) return;
+                _intensity = value;
+                OnIntensityChanged();
+            }
         }
 
-        public void Fade(int initialValue, int finalValue, int milliseconds)
+        private void OnIntensityChanged()
         {
-            throw new NotImplementedException();
+            if (_intensity < MinRange || _intensity > MaxRange)
+            {
+                throw new ArgumentOutOfRangeException("intensity",
+                    "Minimum range: {0} / Maximum range: {1}".FormatWith(MinRange, MaxRange));
+            }
+            Board.AnalogWrite(Pin, _intensity);
         }
 
-        public void Fade(int initialValue, int finalValue, TimeSpan milliseconds)
+        public LedPwm(IArduino board, int pin, ITimer timer = null)
+            : base(board, pin, timer)
         {
-            throw new NotImplementedException();
+        }
+
+
+        public void Fade(int finalValue, TimeSpan? period = null)
+        {
+            Fade(_intensity, finalValue, period);
+        }
+
+        public void Fade(int initialValue, int finalValue, TimeSpan? period = null)
+        {
+            if (period == null)
+            {
+                period = 1.Seconds();
+            }
+            var direction = finalValue > initialValue ? 1 : -1;
+            SetInterval(() =>
+            {
+                if (Intensity == finalValue)
+                {
+                    StopTimer();
+                    return;
+                }
+                Intensity += direction;
+            }, period.Value.Milliseconds/((finalValue - initialValue)*2));
         }
     }
 }
