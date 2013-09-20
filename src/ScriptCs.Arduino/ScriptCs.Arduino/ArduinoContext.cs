@@ -1,8 +1,8 @@
 ﻿using ScriptCs.Contracts;
 
-namespace ScriptCs.Arduino {
+namespace ScriptCs.Arduino
+{
     public class ArduinoContext : IScriptPackContext
     {
-       
     }
 }

@@ -8,6 +8,7 @@ namespace ScriptCs.Arduino
         {
             return String.Format(s, args);
         }
+
         public static bool HasValue(this string s)
         {
             return !String.IsNullOrWhiteSpace(s);

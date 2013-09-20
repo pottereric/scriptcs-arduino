@@ -21,10 +21,10 @@ namespace ScriptCs.Arduino.Models
 
         private readonly object _locked = new Object();
         private readonly int[] _storedInputData = new int[MaxDataBytes];
-        private volatile int[] _analogInputData = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        private volatile int[] _analogInputData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-        private volatile int[] _digitalInputData = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        private volatile int[] _digitalOutputData = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        private volatile int[] _digitalInputData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        private volatile int[] _digitalOutputData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         private int _executeMultiByteCommand;
         private int _multiByteChannel;
@@ -36,7 +36,7 @@ namespace ScriptCs.Arduino.Models
         private readonly SerialPort _serialPort;
         private readonly int _delay;
         private readonly string _serialPortName;
-        
+
         public bool Debug { get; set; }
 
         public Arduino(string serialPortName = "", int baudRate = 57600, int delay = 2000)
@@ -58,6 +58,7 @@ namespace ScriptCs.Arduino.Models
             };
             _delay = delay;
         }
+
         /// <summary>
         ///     Opens the serial port connection, should it be required. By default the port is
         ///     opened when the object is first created.
@@ -84,13 +85,13 @@ namespace ScriptCs.Arduino.Models
             var command = new byte[2];
             for (int i = 0; i < 6; i++)
             {
-                command[0] = (byte)(ReportAnalog | i);
+                command[0] = (byte) (ReportAnalog | i);
                 command[1] = 1;
                 _serialPort.Write(command, 0, 2);
             }
             for (int i = 0; i < 2; i++)
             {
-                command[0] = (byte)(ReportDigital | i);
+                command[0] = (byte) (ReportDigital | i);
                 command[1] = 1;
                 _serialPort.Write(command, 0, 2);
             }
@@ -153,8 +154,8 @@ namespace ScriptCs.Arduino.Models
 
             var message = new byte[3];
             message[0] = SetPinMode;
-            message[1] = (byte)(pin);
-            message[2] = (byte)((int)mode);
+            message[1] = (byte) (pin);
+            message[2] = (byte) ((int) mode);
             _serialPort.Write(message, 0, 3);
         }
 
@@ -165,7 +166,7 @@ namespace ScriptCs.Arduino.Models
         /// <param name="value">Value either Arduino.LOW or Arduino.HIGH.</param>
         public void DigitalWrite(int pin, DigitalPin value)
         {
-            var intValue = (int)value;
+            var intValue = (int) value;
             int portNumber = (pin >> 3) & 0x0F;
             Log("[digital] - Writing value {0} on pin {1} (port number {2})".FormatWith(value, pin, portNumber));
             var message = new byte[3];
@@ -175,9 +176,9 @@ namespace ScriptCs.Arduino.Models
             else
                 _digitalOutputData[portNumber] |= (1 << (pin & 0x07));
 
-            message[0] = (byte)(DigitalMessage | portNumber);
-            message[1] = (byte)(_digitalOutputData[portNumber] & 0x7F);
-            message[2] = (byte)(_digitalOutputData[portNumber] >> 7);
+            message[0] = (byte) (DigitalMessage | portNumber);
+            message[1] = (byte) (_digitalOutputData[portNumber] & 0x7F);
+            message[2] = (byte) (_digitalOutputData[portNumber] >> 7);
             _serialPort.Write(message, 0, 3);
         }
 
@@ -191,9 +192,9 @@ namespace ScriptCs.Arduino.Models
             Log(String.Format("[analog] Writing value {0} on pin {1}", value, pin));
 
             var message = new byte[3];
-            message[0] = (byte)(AnalogMessage | (pin & 0x0F));
-            message[1] = (byte)(value & 0x7F);
-            message[2] = (byte)(value >> 7);
+            message[0] = (byte) (AnalogMessage | (pin & 0x0F));
+            message[1] = (byte) (value & 0x7F);
+            message[2] = (byte) (value >> 7);
             _serialPort.Write(message, 0, 3);
         }
 
