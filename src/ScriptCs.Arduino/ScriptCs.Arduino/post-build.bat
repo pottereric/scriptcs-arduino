@@ -1,0 +1,1 @@
+xcopy "bin\Debug\ScriptCs.Arduino.dll" "..\..\..\dev-examples\bin\" /R /Y /I

@@ -3,6 +3,7 @@ using Moq;
 using NUnit.Framework;
 using ScriptCs.Arduino.Components;
 using ScriptCs.Arduino.Interfaces;
+using ScriptCs.Arduino.Models;
 using Should.Fluent;
 
 namespace ScriptCs.Arduino.Tests.Components
@@ -19,6 +20,8 @@ namespace ScriptCs.Arduino.Tests.Components
         {
             _arduino = new Mock<IArduino>(MockBehavior.Strict);
             _timer = new MockedTimer();
+            _arduino.Setup(a => a.DigitalWrite(Pin, DigitalPin.Low)).Verifiable();
+            _arduino.Setup(a => a.PinMode(Pin, PinMode.Pwm)).Verifiable();
             _led = new LedPwm(_arduino.Object, Pin, _timer);
             _led.Intensity.Should().Equal(0);
         }

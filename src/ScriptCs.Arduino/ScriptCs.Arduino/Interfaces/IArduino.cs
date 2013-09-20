@@ -1,6 +1,9 @@
-﻿namespace ScriptCs.Arduino.Interfaces
+﻿using ScriptCs.Arduino.Models;
+using System;
+
+namespace ScriptCs.Arduino.Interfaces
 {
-    public interface IArduino
+    public interface IArduino : IDisposable
     {
         bool Debug { get; set; }
 

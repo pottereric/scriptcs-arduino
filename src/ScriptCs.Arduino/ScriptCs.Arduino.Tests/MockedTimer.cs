@@ -18,7 +18,7 @@ namespace ScriptCs.Arduino.Tests
             IsDisposed = true;
         }
 
-        public void Start(Action action, int dueTime, int period)
+        public void Start(Action action, TimeSpan dueTime, TimeSpan period)
         {
             _action = action;
             Tick();

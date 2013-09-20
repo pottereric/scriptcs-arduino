@@ -57,6 +57,7 @@ namespace ScriptCs.Arduino.Models
                 StopBits = StopBits.One
             };
             _delay = delay;
+            Open();
         }
 
         /// <summary>
@@ -287,6 +288,11 @@ namespace ScriptCs.Arduino.Models
                 return;
             }
             Console.WriteLine(message);
+        }
+
+        public void Dispose()
+        {
+            Close();
         }
     }
 }

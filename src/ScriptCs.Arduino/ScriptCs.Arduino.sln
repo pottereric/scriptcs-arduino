@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.20827.3
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCs.Arduino", "ScriptCs.Arduino\ScriptCs.Arduino.csproj", "{E5C70FAA-1351-42DF-AE47-99625E1BF117}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCs.Arduino.Tests", "ScriptCs.Arduino.Tests\ScriptCs.Arduino.Tests.csproj", "{6688664B-48EB-4D56-923E-FDB94E85D511}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCs.ConsoleApp", "ScriptCs.ConsoleApp\ScriptCs.ConsoleApp.csproj", "{AEE7FB9E-76B0-478D-9494-787C123EBA73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +21,10 @@ Global
 		{6688664B-48EB-4D56-923E-FDB94E85D511}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6688664B-48EB-4D56-923E-FDB94E85D511}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6688664B-48EB-4D56-923E-FDB94E85D511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEE7FB9E-76B0-478D-9494-787C123EBA73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEE7FB9E-76B0-478D-9494-787C123EBA73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEE7FB9E-76B0-478D-9494-787C123EBA73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEE7FB9E-76B0-478D-9494-787C123EBA73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

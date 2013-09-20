@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using ScriptCs.Arduino.Components;
 using ScriptCs.Arduino.Interfaces;
+using ScriptCs.Arduino.Models;
 using Should.Fluent;
 
 namespace ScriptCs.Arduino.Tests.Components
@@ -18,6 +19,8 @@ namespace ScriptCs.Arduino.Tests.Components
         {
             _arduino = new Mock<IArduino>(MockBehavior.Strict);
             _timer = new MockedTimer();
+            _arduino.Setup(a => a.DigitalWrite(Pin, DigitalPin.Low)).Verifiable();
+            _arduino.Setup(a => a.PinMode(Pin, PinMode.Output)).Verifiable();
             _led = new Led(_arduino.Object, Pin, _timer);
         }
 
@@ -61,7 +64,7 @@ namespace ScriptCs.Arduino.Tests.Components
             _led.Toggle();
             _led.State.Should().Equal(LedState.On);
             _arduino.Verify(a => a.DigitalWrite(Pin, DigitalPin.High), Times.Exactly(2));
-            _arduino.Verify(a => a.DigitalWrite(Pin, DigitalPin.Low), Times.Once);
+            _arduino.Verify(a => a.DigitalWrite(Pin, DigitalPin.Low), Times.Exactly(2));
         }
 
         [Test]
@@ -76,7 +79,7 @@ namespace ScriptCs.Arduino.Tests.Components
             _timer.Tick();
             _led.State.Should().Equal(LedState.On);
             _arduino.Verify(a => a.DigitalWrite(Pin, DigitalPin.High), Times.Exactly(2));
-            _arduino.Verify(a => a.DigitalWrite(Pin, DigitalPin.Low), Times.Once);
+            _arduino.Verify(a => a.DigitalWrite(Pin, DigitalPin.Low), Times.Exactly(2));
         }
 
         [Test]

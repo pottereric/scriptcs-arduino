@@ -1,4 +1,4 @@
-﻿namespace ScriptCs.Arduino
+﻿namespace ScriptCs.Arduino.Models
 {
     public enum DigitalPin
     {

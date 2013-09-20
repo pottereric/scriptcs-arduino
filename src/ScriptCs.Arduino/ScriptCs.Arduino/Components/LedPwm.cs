@@ -1,14 +1,21 @@
 ﻿using System;
 using ScriptCs.Arduino.Interfaces;
+using ScriptCs.Arduino.Models;
 
 namespace ScriptCs.Arduino.Components
 {
-    public class LedPwm : Led
+    public class LedPwm : LedBase
     {
         private const int MinRange = 0;
         private const int MaxRange = 255;
 
         private int _intensity;
+
+        public LedPwm(IArduino board, int pin, ITimer timer = null)
+            : base(board, pin, timer)
+        {
+            SetPinMode(PinMode.Pwm);
+        }
 
         public int Intensity
         {
@@ -31,12 +38,6 @@ namespace ScriptCs.Arduino.Components
             Board.AnalogWrite(Pin, _intensity);
         }
 
-        public LedPwm(IArduino board, int pin, ITimer timer = null)
-            : base(board, pin, timer)
-        {
-        }
-
-
         public void Fade(int finalValue, TimeSpan? period = null)
         {
             Fade(_intensity, finalValue, period);
@@ -57,7 +58,7 @@ namespace ScriptCs.Arduino.Components
                     return;
                 }
                 Intensity += direction;
-            }, period.Value.Milliseconds/((finalValue - initialValue)*2));
+            }, (int)(period.Value.TotalMilliseconds) / ((finalValue - initialValue) * 2));
         }
     }
 }

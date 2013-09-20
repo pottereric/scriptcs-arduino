@@ -11,5 +11,10 @@ namespace ScriptCs.Arduino.Models
         {
             Pin = pin;
         }
+
+        protected void SetPinMode(PinMode mode)
+        {
+            Board.PinMode(Pin, mode);
+        }
     }
 }

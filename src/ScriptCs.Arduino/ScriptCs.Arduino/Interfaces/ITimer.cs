@@ -4,6 +4,6 @@ namespace ScriptCs.Arduino.Interfaces
 {
     public interface ITimer : IDisposable
     {
-        void Start(Action action, int dueTime, int period);
+        void Start(Action action, TimeSpan dueTime, TimeSpan period);
     }
 }

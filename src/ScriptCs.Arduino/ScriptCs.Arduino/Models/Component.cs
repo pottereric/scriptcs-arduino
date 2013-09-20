@@ -17,17 +17,17 @@ namespace ScriptCs.Arduino.Models
 
         protected void SetInterval(Action action, int milliseconds)
         {
-            _timer.Start(action, 0, milliseconds);
+            _timer.Start(action, 0.Milliseconds(), milliseconds.Milliseconds());
         }
 
         protected void SetTimeout(Action action, int milliseconds)
         {
-            _timer.Start(action, milliseconds, Timeout.Infinite);
+            _timer.Start(action, milliseconds.Milliseconds(), Timeout.Infinite.Milliseconds());
         }
 
         protected void SetTimeoutAndInterval(Action action, int fromNow, int every)
         {
-            _timer.Start(action, fromNow, every);
+            _timer.Start(action, fromNow.Milliseconds(), every.Milliseconds());
         }
 
         protected void StopTimer()
