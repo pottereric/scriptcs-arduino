@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\LedRGBTests.cs" />
     <Compile Include="Components\LedPwmTests.cs" />
     <Compile Include="Components\LedTests.cs" />
     <Compile Include="MockedTimer.cs" />

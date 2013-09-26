@@ -9,10 +9,10 @@ namespace ScriptCs.Arduino.Tests.Components
 {
     public class LedTests
     {
-        private Led _led;
-        private Mock<IArduino> _arduino;
-        private MockedTimer _timer;
         private const int Pin = 13;
+        private Mock<IArduino> _arduino;
+        private Led _led;
+        private MockedTimer _timer;
 
         [SetUp]
         public void Setup()

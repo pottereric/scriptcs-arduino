@@ -1,10 +1,12 @@
-var arduino = Require<Arduino>();
-arduino.Debug = true;
-arduino.OnBoardReady = () =>
-{
-    Console.WriteLine("Let's begin!");
-    var led = new Led(arduino, 13);
-    led.Strobe();
-    Thread.Sleep(2000);
-    led.Stop();
-};
+var ctx = Require<ArduinoContext>();
+var board = ctx.CreateBoard();
+var random = new Random();
+
+var led = new Led(board, 9);
+Action wait = () => Thread.Sleep(2.Seconds());
+led.StrobeOn();
+wait();
+led.StrobeOff();
+led.Off();
+
+board.Close();

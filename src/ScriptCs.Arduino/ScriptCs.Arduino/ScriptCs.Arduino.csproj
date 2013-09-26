@@ -52,6 +52,7 @@
     <Compile Include="Components\Led.cs" />
     <Compile Include="Components\LedBase.cs" />
     <Compile Include="Components\LedPwm.cs" />
+    <Compile Include="Components\LedRGB.cs" />
     <Compile Include="Components\LedState.cs" />
     <Compile Include="Interfaces\ITimer.cs" />
     <Compile Include="IntExtensions.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Interfaces\IArduino.cs" />
     <Compile Include="Models\Arduino.cs" />
     <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\MultiPinComponentcs.cs" />
     <Compile Include="Models\SinglePinComponent.cs" />
     <Compile Include="Models\Timer.cs" />
     <Compile Include="Models\PinMode.cs" />

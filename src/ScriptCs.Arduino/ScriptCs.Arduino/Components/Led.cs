@@ -1,5 +1,4 @@
-﻿using System;
-using ScriptCs.Arduino.Interfaces;
+﻿using ScriptCs.Arduino.Interfaces;
 using ScriptCs.Arduino.Models;
 
 namespace ScriptCs.Arduino.Components
