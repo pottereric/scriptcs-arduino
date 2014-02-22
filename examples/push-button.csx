@@ -1,16 +1,16 @@
-var arduino = Require<Arduino>();
+var ctx = Require<ArduinoContext>();
+var arduino = ctx.CreateBoard();
 var buttonPin = 2;
 var ledPin = 13;
 
-arduino.Setup();
-arduino.Open();
-arduino.PinMode(2, Arduino.INPUT);
-arduino.PinMode(ledPin, Arduino.OUTPUT);
+arduino.PinMode(buttonPin, PinMode.Input);
+arduino.PinMode(ledPin, PinMode.Output);
 
 while(!Console.KeyAvailable)
 {
 	var buttonPosition = arduino.DigitalRead(buttonPin);
-	arduino.DigitalWrite(ledPin, buttonPosition);
+	DigitalPin mode = buttonPosition == 1 ? DigitalPin.High : DigitalPin.Low;
+	arduino.DigitalWrite(ledPin, mode);
 }
 
 arduino.Close();
